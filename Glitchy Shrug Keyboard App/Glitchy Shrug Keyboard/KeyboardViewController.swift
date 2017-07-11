@@ -39,19 +39,12 @@ class KeyboardViewController: UIInputViewController {
     self.shrugButton.setTitle(self.currentShrugString, for: [])
   }
   
-
-  override func updateViewConstraints() {
-    super.updateViewConstraints()
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
+  private func addUserInterface() {
     // Shrug button
     
     self.shrugButton = UIButton(type: .custom) // .custom prevents animation when changing title
-  
-    self.shrugButton.setTitle(NSLocalizedString("¯\\_(ツ)_/¯", comment: "TK"), for: [])
+    
+    self.shrugButton.setTitle(NSLocalizedString(self.currentShrugString, comment: "TK"), for: [])
     self.shrugButton.contentEdgeInsets = UIEdgeInsetsMake(70, 0, 70, 0)
     self.shrugButton.sizeToFit()
     self.shrugButton.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +59,7 @@ class KeyboardViewController: UIInputViewController {
     self.shrugButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     self.shrugButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
     self.shrugButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-  
+    
     // Slider
     
     self.slider = UISlider()
@@ -98,7 +91,20 @@ class KeyboardViewController: UIInputViewController {
     
     self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
     self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-}
+  }
+  
+
+  override func updateViewConstraints() {
+    super.updateViewConstraints()
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.currentShrugString = self.getShrugString(value: 0)
+    
+    self.addUserInterface()
+  }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
